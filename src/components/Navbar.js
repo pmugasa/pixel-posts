@@ -27,7 +27,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/received" className="">
+              <Link to="/received" className="indicator">
                 <FontAwesomeIcon icon={faBoxArchive} size="lg" />
                 <span className="hidden lg:block">Recieved</span>
               </Link>

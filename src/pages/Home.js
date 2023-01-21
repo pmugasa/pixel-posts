@@ -1,4 +1,10 @@
+import Signup from "./Signup";
+
 const Home = () => {
-  return <h1>Hello from Home</h1>;
+  return (
+    <div className="h-screen w-screen relative">
+      <Signup />;
+    </div>
+  );
 };
 export default Home;
