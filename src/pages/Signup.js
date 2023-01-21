@@ -1,4 +1,6 @@
 const Signup = () => {
+  //TODO: fix the scrolling effect
+
   const handleSubmit = (e) => {
     //preventing browser from reloading
     e.preventDefault();

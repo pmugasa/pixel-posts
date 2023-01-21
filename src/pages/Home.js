@@ -1,10 +1,6 @@
-import Signup from "./Signup";
+import Login from "./Login";
 
 const Home = () => {
-  return (
-    <div className="h-screen w-screen relative">
-      <Signup />;
-    </div>
-  );
+  return <Login />;
 };
 export default Home;
