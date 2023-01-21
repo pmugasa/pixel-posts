@@ -12,43 +12,43 @@ import {
 const Navbar = () => {
   return (
     <>
-      <div className=" md:w-full bg-primary md:flex">
-        <div className=" hidden xl:block">
+      <nav className="flex flex-row px-1 bg-primary">
+        <div className="hidden sm:block p-2">
           <Link to="/" className="btn btn-ghost normal-case text-xl">
             PixelPost
           </Link>
         </div>
-        <div className="md:flex-none md:ml-auto">
-          <ul className="flex  space-x-6 justify-evenly menu menu-horizontal p-2">
+        <div className="sm:flex-none sm:ml-auto sm:pr-4">
+          <ul className="flex  space-x-6 justify-evenly menu menu-horizontal p-2 sm:space-x-8">
             <li>
               <Link to="/" className="">
                 <FontAwesomeIcon icon={faHouseChimney} size="lg" />
-                <span className="hidden sm:block">Home</span>
+                <span className="hidden lg:block">Home</span>
               </Link>
             </li>
             <li>
               <Link to="/received" className="">
                 <FontAwesomeIcon icon={faBoxArchive} size="lg" />
-                <span className="hidden sm:block">Recieved</span>
+                <span className="hidden lg:block">Recieved</span>
               </Link>
             </li>
 
             <li>
               <Link to="/in-review">
                 <FontAwesomeIcon icon={faHourglassHalf} size="lg" />
-                <span className="hidden sm:block">In Review</span>
+                <span className="hidden lg:block">In Review</span>
               </Link>
             </li>
             <li>
               <Link to="/ready-to-send">
                 <FontAwesomeIcon icon={faPaperPlane} size="lg" />
-                <span className="hidden sm:block">Ready To Send</span>
+                <span className="hidden lg:block">Ready To Send</span>
               </Link>
             </li>
             <li>
               <Link to="/shipping-rates">
                 <FontAwesomeIcon icon={faCalculator} size="lg" />
-                <span className="hidden sm:block">Shipping Rates</span>
+                <span className="hidden lg:block">Shipping Rates</span>
               </Link>
             </li>
 
@@ -76,7 +76,7 @@ const Navbar = () => {
             </div>
           </ul>
         </div>
-      </div>
+      </nav>
       <Outlet />
     </>
   );
