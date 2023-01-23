@@ -2,7 +2,7 @@ import { Outlet, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouseChimney,
-  faHourglassHalf,
+  faInbox,
   faPaperPlane,
   faBoxArchive,
   faCircleUser,
@@ -28,15 +28,15 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/received" className="indicator">
-                <FontAwesomeIcon icon={faBoxArchive} size="lg" />
+                <FontAwesomeIcon icon={faInbox} size="lg" />
                 <span className="hidden lg:block">Recieved</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/in-review">
-                <FontAwesomeIcon icon={faHourglassHalf} size="lg" />
-                <span className="hidden lg:block">In Review</span>
+              <Link to="/new-parcel">
+                <FontAwesomeIcon icon={faBoxArchive} size="lg" />
+                <span className="hidden lg:block">New Parcel</span>
               </Link>
             </li>
             <li>

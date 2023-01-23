@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
-import InReview from "./pages/InReview";
-import Login from "./pages/InReview";
+import NewParcel from "./pages/NewParcel";
+import Login from "./pages/Login";
 import ReadyToSend from "./pages/ReadyToSend";
 import Received from "./pages/Received";
 import Settings from "./pages/Settings";
@@ -18,7 +18,7 @@ const RouteSwitch = () => {
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="in-review" element={<InReview />} />
+          <Route path="new-parcel" element={<NewParcel />} />
           <Route path="login" element={<Login />} />
           <Route path="ready-to-send" element={<ReadyToSend />} />
           <Route path="received" element={<Received />} />
