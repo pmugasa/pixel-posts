@@ -3,7 +3,7 @@ import CustomsForm from "../components/CustomsForm";
 const Customs = () => {
   return (
     <>
-      <div>
+      <div className="w-full p-8">
         <CustomsForm />
       </div>
     </>
