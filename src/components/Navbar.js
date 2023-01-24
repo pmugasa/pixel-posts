@@ -9,7 +9,7 @@ import {
   faCalculator,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <>
       <nav className="flex flex-row px-1 bg-primary">
@@ -35,8 +35,13 @@ const Navbar = () => {
 
             <li>
               <Link to="/new-parcel">
-                <FontAwesomeIcon icon={faBoxArchive} size="lg" />
-                <span className="hidden lg:block">New Parcel</span>
+                <div className="indicator">
+                  <span className="indicator-item indicator-end badge badge-xs badge-secondary">
+                    {props.packedItems.length}
+                  </span>
+                  <FontAwesomeIcon icon={faBoxArchive} size="lg" />
+                  <span className="hidden lg:block">New Parcel</span>
+                </div>
               </Link>
             </li>
             <li>
