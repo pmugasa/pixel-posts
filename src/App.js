@@ -11,29 +11,30 @@ import Settings from "./pages/Settings";
 import Signup from "./pages/Signup";
 import ShippingRates from "./pages/ShippingRates";
 import NoPage from "./pages/NoPage";
+import Customs from "./pages/Customs";
 
 const App = () => {
   const [receivedParcels, setReceivedParcels] = useState([
     {
-      shipmentId: "#004",
+      shipmentId: "#001",
       date: "Jan 23, 2023",
       weight: 0.5,
       img: "https://placeimg.com/192/192/people",
       trackingId: " EV938507560CN",
     },
     {
-      shipmentId: "#005",
-      date: "Jan 23, 2023",
-      weight: 0.8,
-      img: "https://placeimg.com/192/192/people",
-      trackingId: "175030116230104059",
-    },
-    {
-      shipmentId: "#006",
+      shipmentId: "#003",
       date: "Jan 23, 2023",
       weight: 1.0,
       img: "https://placeimg.com/192/192/people",
       trackingId: "9505511597628205266397",
+    },
+    {
+      shipmentId: "#002",
+      date: "Jan 23, 2023",
+      weight: 0.8,
+      img: "https://placeimg.com/192/192/people",
+      trackingId: "175030116230104059",
     },
   ]);
   const [packedItems, setPackedItems] = useState([]);
@@ -68,6 +69,7 @@ const App = () => {
             />
           }
         />
+        <Route path="customs-declaration" element={<Customs />} />
         <Route path="settings" element={<Settings />} />
         <Route path="sign-up" element={<Signup />} />
         <Route path="shipping-rates" element={<ShippingRates />} />
