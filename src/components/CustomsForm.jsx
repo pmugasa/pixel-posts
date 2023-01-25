@@ -146,10 +146,11 @@ const CustomsForm = () => {
           >
             Add Item
           </button>
+          <div className="divider"></div>
           <div className="flex justify-center">
             <button
               type="submit"
-              className="btn btn-sm btn-block btn-primary mt-16"
+              className="btn btn-sm btn-block btn-primary mt-12"
             >
               Submit
             </button>
