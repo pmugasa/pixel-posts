@@ -77,7 +77,7 @@ const NewParcel = ({
             >
               Fill in customs declaration form
             </Link>
-            <button className="btn btn-sm ml-auto">Pack</button>
+            <button className="btn btn-sm ml-auto">Next</button>
           </div>
         </div>
       </div>

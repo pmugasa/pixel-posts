@@ -6,6 +6,8 @@ const Customs = () => {
       <div className="w-full p-8">
         <CustomsForm />
       </div>
+
+      <div></div>
     </>
   );
 };
