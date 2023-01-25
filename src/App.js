@@ -41,7 +41,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Navbar packedItems={packedItems} />
+      <Navbar packedItems={packedItems} receivedParcels={receivedParcels} />
       <Routes>
         <Route index element={<Home />} />
         <Route path="profile" element={<Profile />} />

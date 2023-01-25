@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleQuestion,
   faCircleDot,
+  faShippingFast,
 } from "@fortawesome/free-solid-svg-icons";
 
 const ReadyToSend = () => {
@@ -27,6 +28,53 @@ const ReadyToSend = () => {
 
   return (
     <>
+      <div className="w-full p-4 flex justify-center items-center ">
+        <div className="border-2 border-gray-400 shadow-sm rounded-md w-full h-fit mx-auto">
+          <div className=" p-4 border-b-2 border-gray-200">
+            <div className="flex">
+              <h2 className="font-bold text-base">Order #4001</h2>
+              <div className="badge badge-success ml-auto ">
+                <span className="font-bold">Shipping Soon</span>
+              </div>
+            </div>
+
+            <h3 className="font-bold text-gray-500 mt-2">
+              TRACKING NUMBER 175030116230104059
+            </h3>
+          </div>
+
+          <div className="p-4 w-full">
+            <h3 className="font-bold text-gray-500">DESTINATION</h3>
+            <div className="mt-4">
+              <p className="font-semibold text-gray-500">Peterson Mugasa</p>
+              <p className="font-semibold text-gray-500">0123 456 789</p>
+              <p className="font-semibold text-gray-500">18 Redcliff Close</p>
+              <p className="font-semibold text-gray-500">Zimre Park</p>
+              <p className="font-semibold text-gray-500">7441</p>
+              <p className="font-semibold text-gray-500">Zimbabwe</p>
+            </div>
+          </div>
+          <div className="divider"></div>
+          <div className="p-4 w-full">
+            <h3 className="font-bold text-gray-500">CARRIER</h3>
+            <div className="mt-4">
+              <p className="font-semibold text-gray-500">
+                <span className="mr-4">
+                  <FontAwesomeIcon icon={faShippingFast} />
+                </span>
+                Fedex Internation Economy
+              </p>
+            </div>
+          </div>
+
+          <div className="divider"></div>
+
+          <div className="w-full p-4 space-x-4">
+            <button className="btn btn-sm btn-primary ">TRACK ORDER</button>
+          </div>
+        </div>
+      </div>
+
       <div className="w-full p-4 flex justify-center items-center ">
         <div className="border-2 border-gray-400 shadow-sm rounded-md w-full h-fit mx-auto">
           <div className="flex p-4 border-b-2 border-gray-200">
@@ -88,11 +136,69 @@ const ReadyToSend = () => {
               <p className="font-bold ml-auto">R 4, 000.00</p>
             </div>
           </div>
+          <div className="divider"></div>
+
+          <div className="p-4 w-full">
+            <h3 className="font-bold text-gray-500">DESTINATION</h3>
+            <div className="mt-4">
+              <p className="font-semibold text-gray-500">18 Redcliff Close</p>
+              <p className="font-semibold text-gray-500">Zimre Park</p>
+              <p className="font-semibold text-gray-500">7441</p>
+              <p className="font-semibold text-gray-500">Zimbabwe</p>
+            </div>
+          </div>
+          <div className="divider"></div>
 
           <div className="w-full p-4 space-x-4">
             <button className="btn btn-sm btn-primary ">Make payment</button>
             <button className="btn btn-sm btn-outline btn-ghost ">
               Edit Address
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full p-4 flex justify-center items-center ">
+        <div className="border-2 border-gray-400 shadow-sm rounded-md w-full h-fit mx-auto">
+          <div className="flex p-4 border-b-2 border-gray-200">
+            <h2 className="font-bold text-base">Parcel #002</h2>
+            <div className="badge badge-ghost ml-auto ">
+              <span className="font-bold">Being Packed</span>
+            </div>
+          </div>
+
+          <div className="w-full p-4">
+            <h3 className="font-bold text-gray-500">SHIPMENTS</h3>
+
+            <div className="  mt-4">
+              <p className=" text-gray-500">Shipment #001</p>
+              <p className=" text-gray-500">Shipment #002</p>
+              <p className=" text-gray-500">Shipment #003</p>
+            </div>
+          </div>
+          <div className="divider"></div>
+
+          <div className="p-4 w-full">
+            <h3 className="font-bold text-gray-500">
+              ADDITIONAL SERVICES REQUESTED
+            </h3>
+            <div className="mt-4">
+              <ul>
+                <li className="font-semibold text-gray-500">Remove invoices</li>
+                <li className="font-semibold text-gray-500">
+                  Add extra bubble wrap
+                </li>
+                <li className="font-semibold text-gray-500">
+                  Keep original boxes
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="divider"></div>
+
+          <div className="w-full p-4 space-x-4">
+            <button className="btn btn-sm btn-primary " disabled>
+              Make payment
             </button>
           </div>
         </div>

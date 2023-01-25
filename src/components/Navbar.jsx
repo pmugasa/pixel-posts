@@ -28,8 +28,13 @@ const Navbar = (props) => {
             </li>
             <li>
               <Link to="/received" className="indicator">
-                <FontAwesomeIcon icon={faInbox} size="lg" />
-                <span className="hidden lg:block">Recieved</span>
+                <div className="indicator">
+                  <span className="indicator-item indicator-end badge badge-xs badge-secondary">
+                    {props.receivedParcels.length}
+                  </span>
+                  <FontAwesomeIcon icon={faInbox} size="lg" />
+                  <span className="hidden lg:block">Recieved</span>
+                </div>
               </Link>
             </li>
 
