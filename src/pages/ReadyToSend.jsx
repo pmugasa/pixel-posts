@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleQuestion,
-  faCircleDot,
-  faShippingFast,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faFedex } from "@fortawesome/free-brands-svg-icons";
 const ReadyToSend = () => {
   const [order, setOrder] = useState({
     parcelId: "#001",
@@ -60,9 +56,9 @@ const ReadyToSend = () => {
             <div className="mt-4">
               <p className="font-semibold text-gray-500">
                 <span className="mr-4">
-                  <FontAwesomeIcon icon={faShippingFast} />
+                  <FontAwesomeIcon icon={faFedex} size="2xl" />
                 </span>
-                Fedex Internation Economy
+                Fedex International Economy
               </p>
             </div>
           </div>

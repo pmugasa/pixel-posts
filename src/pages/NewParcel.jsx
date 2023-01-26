@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+
+import CustomsForm from "../components/CustomsForm";
+import AddressForm from "../components/AddressForm";
 
 const NewParcel = ({
   setPackedItems,
@@ -70,13 +72,10 @@ const NewParcel = ({
               </div>
             );
           })}
+
+          <CustomsForm />
+          <AddressForm />
           <div className="flex">
-            <Link
-              to="/customs-declaration"
-              className="link link-hover link-neutral"
-            >
-              Fill in customs declaration form
-            </Link>
             <button className="btn btn-sm ml-auto">Request packing</button>
           </div>
         </div>

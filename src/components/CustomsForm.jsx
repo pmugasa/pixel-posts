@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+
 const CustomsForm = () => {
   const [formValues, setFormValues] = useState([
     {
       description: "",
       quantity: "",
-      value: "",
-      batteries: "",
+      net_weight: "",
+      mass_unit: "kg",
+      value_amount: "",
+      value_currency: "ZAR",
+      origin_country: "RSA",
     },
   ]);
 
@@ -23,8 +25,11 @@ const CustomsForm = () => {
       {
         description: "",
         quantity: "",
-        value: "",
-        batteries: "",
+        net_weight: "",
+        mass_unit: "kg",
+        value_amount: "",
+        value_currency: "ZAR",
+        origin_country: "RSA",
       },
     ]);
   };
@@ -37,8 +42,9 @@ const CustomsForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = JSON.stringify(formValues);
-    console.log(formData);
+    const customsItem = JSON.stringify(formValues);
+
+    console.log(customsItem);
   };
 
   return (
@@ -98,8 +104,8 @@ const CustomsForm = () => {
                   </label>
                   <input
                     type="text"
-                    name="itemValue"
-                    value={element.inputValue}
+                    name="value_amount"
+                    value={element.value_amount}
                     onChange={(e) => handleChange(index, e)}
                     inputMode="numeric"
                     placeholder="R1 000.00"
@@ -116,6 +122,22 @@ const CustomsForm = () => {
                     type="text"
                     name="quantity"
                     value={element.quantity}
+                    onChange={(e) => handleChange(index, e)}
+                    inputMode="numeric"
+                    placeholder="1"
+                    required
+                    className="input input-bordered input-sm w-full "
+                  />
+                </div>
+
+                <div className="">
+                  <label className="label">
+                    <span className="label-text">Weight (kg)</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="net_weight"
+                    value={element.net_weight}
                     onChange={(e) => handleChange(index, e)}
                     inputMode="numeric"
                     placeholder="1"
@@ -156,15 +178,6 @@ const CustomsForm = () => {
             </button>
           </div>
         </form>
-      </div>
-      <div className="border-2 border-gray-200 border-rounded shadow-sm w-96 p-6 mt-6 h-40">
-        <div className="space-x-6 flex justify-center items-center">
-          <span className="text-base font-semibold ">
-            Description Hello World
-          </span>
-          <span>Quantity </span>
-          <span>Value</span>
-        </div>
       </div>
     </>
   );
