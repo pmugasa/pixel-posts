@@ -51,8 +51,8 @@ const CustomsForm = () => {
     <>
       <div className="border-2 border-gray-200 border-rounded shadow-sm w-96 p-6 mt-6">
         <div className="mb-4">
-          <h3 className="text-start text-lg font-semibold font-sans">
-            Customs Declaration Form
+          <h3 className="text-center text-gray-500 text-lg font-bold">
+            CUSTOMS DECLARATION FORM
           </h3>
         </div>
 
@@ -148,9 +148,9 @@ const CustomsForm = () => {
               </div>
 
               {index ? (
-                <div className="mt-4 ml-auto relative top-12">
+                <div className="mt-4 ml-auto relative top-10">
                   <button
-                    className="btn btn-sm"
+                    className="btn btn-xs btn-error"
                     type="button"
                     onClick={() => removeFormFields(index)}
                   >
@@ -163,7 +163,7 @@ const CustomsForm = () => {
 
           <button
             type="button"
-            className="btn btn-sm mt-4"
+            className="btn btn-xs mt-4"
             onClick={() => addFormFields()}
           >
             Add Item

@@ -3,6 +3,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 import CustomsForm from "../components/CustomsForm";
 import AddressForm from "../components/AddressForm";
+import AdditionalServicesForm from "../components/AdditionalServicesForm";
 
 const NewParcel = ({
   setPackedItems,
@@ -75,8 +76,11 @@ const NewParcel = ({
 
           <CustomsForm />
           <AddressForm />
-          <div className="flex">
-            <button className="btn btn-sm ml-auto">Request packing</button>
+          <AdditionalServicesForm />
+          <div className="flex mt-4 w-full">
+            <button className="btn btn-sm ml-auto w-full btn-success">
+              Request packing
+            </button>
           </div>
         </div>
       </div>

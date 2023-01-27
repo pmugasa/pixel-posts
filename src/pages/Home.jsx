@@ -1,6 +1,4 @@
-import Login from "./Login";
-
 const Home = () => {
-  return <Login />;
+  return <h1>Hello from home</h1>;
 };
 export default Home;
