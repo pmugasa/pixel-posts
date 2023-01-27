@@ -55,12 +55,12 @@ const AdditionalServicesForm = () => {
               <label className="label cursor-pointer">
                 <span className="label-text">
                   Item photos
-                  <span className="badge badge-ghost ml-2 badge-sm">R50</span>
+                  <span className="badge badge-primary ml-2 badge-sm">R50</span>
                 </span>
 
                 <input
                   type="checkbox"
-                  className="toggle"
+                  className="toggle toggle-primary"
                   name="itemPhotos"
                   value="50"
                   onChange={handleItemPhotos}
@@ -72,12 +72,14 @@ const AdditionalServicesForm = () => {
               <label className="label cursor-pointer">
                 <span className="label-text">
                   Device testing
-                  <span className="badge badge-ghost ml-2 badge-sm">R100</span>
+                  <span className="badge badge-primary ml-2 badge-sm">
+                    R100
+                  </span>
                 </span>
 
                 <input
                   type="checkbox"
-                  className="toggle"
+                  className="toggle toggle-primary"
                   name="itemPhotos"
                   value="50"
                   onChange={handleDeviceTesting}
@@ -89,12 +91,12 @@ const AdditionalServicesForm = () => {
               <label className="label cursor-pointer">
                 <span className="label-text">
                   Bubble wrap all items
-                  <span className="badge badge-ghost ml-2 badge-sm">R85</span>
+                  <span className="badge badge-primary ml-2 badge-sm">R85</span>
                 </span>
 
                 <input
                   type="checkbox"
-                  className="toggle"
+                  className="toggle toggle-primary"
                   name="itemPhotos"
                   value="50"
                   onChange={handleBubbleWrap}
@@ -106,12 +108,12 @@ const AdditionalServicesForm = () => {
               <label className="label cursor-pointer">
                 <span className="label-text">
                   Double walled box
-                  <span className="badge badge-ghost ml-2 badge-sm">R70</span>
+                  <span className="badge badge-primary ml-2 badge-sm">R70</span>
                 </span>
 
                 <input
                   type="checkbox"
-                  className="toggle"
+                  className="toggle toggle-primary"
                   name="itemPhotos"
                   value="50"
                   onChange={handleDoubleWalledBox}

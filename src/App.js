@@ -38,44 +38,52 @@ const App = () => {
     },
   ]);
   const [packedItems, setPackedItems] = useState([]);
+  const authenticated = true;
+  if (authenticated) {
+    return (
+      <BrowserRouter>
+        <Navbar packedItems={packedItems} receivedParcels={receivedParcels} />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+          <Route
+            path="new-parcel"
+            element={
+              <NewParcel
+                packedItems={packedItems}
+                setPackedItems={setPackedItems}
+                receivedParcels={receivedParcels}
+                setReceivedParcels={setReceivedParcels}
+              />
+            }
+          />
+          <Route path="login" element={<Login />} />
+          <Route path="ready-to-send" element={<ReadyToSend />} />
+          <Route
+            path="received"
+            element={
+              <Received
+                packedItems={packedItems}
+                setPackedItems={setPackedItems}
+                receivedParcels={receivedParcels}
+                setReceivedParcels={setReceivedParcels}
+              />
+            }
+          />
+          <Route path="customs-declaration" element={<Customs />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="sign-up" element={<Signup />} />
+          <Route path="shipping-rates" element={<ShippingRates />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
 
   return (
-    <BrowserRouter>
-      <Navbar packedItems={packedItems} receivedParcels={receivedParcels} />
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="profile" element={<Profile />} />
-        <Route
-          path="new-parcel"
-          element={
-            <NewParcel
-              packedItems={packedItems}
-              setPackedItems={setPackedItems}
-              receivedParcels={receivedParcels}
-              setReceivedParcels={setReceivedParcels}
-            />
-          }
-        />
-        <Route path="login" element={<Login />} />
-        <Route path="ready-to-send" element={<ReadyToSend />} />
-        <Route
-          path="received"
-          element={
-            <Received
-              packedItems={packedItems}
-              setPackedItems={setPackedItems}
-              receivedParcels={receivedParcels}
-              setReceivedParcels={setReceivedParcels}
-            />
-          }
-        />
-        <Route path="customs-declaration" element={<Customs />} />
-        <Route path="settings" element={<Settings />} />
-        <Route path="sign-up" element={<Signup />} />
-        <Route path="shipping-rates" element={<ShippingRates />} />
-        <Route path="*" element={<NoPage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Login />
+    </>
   );
 };
 export default App;
