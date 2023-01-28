@@ -36,7 +36,7 @@ const NewParcel = ({
             <div className="divider"></div>
             {packedItems.map((parcel, i) => {
               return (
-                <div key={parcel.shipmentId}>
+                <div key={parcel.id}>
                   <div>
                     <div className="flex flex-col w-full px-2">
                       <div className=" w-full h-10 mx-auto  p-2 ">

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
@@ -12,31 +12,27 @@ import Signup from "./pages/Signup";
 import ShippingRates from "./pages/ShippingRates";
 import NoPage from "./pages/NoPage";
 import Customs from "./pages/Customs";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase-config.js";
 
 const App = () => {
-  const [receivedParcels, setReceivedParcels] = useState([
-    {
-      shipmentId: "#001",
-      date: "Jan 23, 2023",
-      weight: 0.5,
-      img: "https://placeimg.com/192/192/people",
-      trackingId: " EV938507560CN",
-    },
-    {
-      shipmentId: "#003",
-      date: "Jan 23, 2023",
-      weight: 1.0,
-      img: "https://placeimg.com/192/192/people",
-      trackingId: "9505511597628205266397",
-    },
-    {
-      shipmentId: "#002",
-      date: "Jan 23, 2023",
-      weight: 0.8,
-      img: "https://placeimg.com/192/192/people",
-      trackingId: "175030116230104059",
-    },
-  ]);
+  const [receivedParcels, setReceivedParcels] = useState([]);
+
+  useEffect(() => {
+    const getReceivedParcels = async () => {
+      const data = await getDocs(collection(db, "Received Parcels"));
+
+      const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const updatedData = newData.map((obj) => {
+        obj.date = obj.date.toDate().toDateString();
+        return obj;
+      });
+      setReceivedParcels(updatedData);
+    };
+
+    getReceivedParcels();
+  }, []);
+
   const [packedItems, setPackedItems] = useState([]);
   const authenticated = true;
   if (authenticated) {

@@ -10,7 +10,7 @@ const Received = (props) => {
       <>
         {props.receivedParcels.map((parcel) => {
           return (
-            <div key={parcel.shipmentId}>
+            <div key={parcel.id}>
               <div className="flex flex-col w-screen px-2">
                 <div className="border-2 border-gray-200 rounded-lg  w-full h-28 mx-auto mt-8 p-2 flex flex-col">
                   <div className="flex justify-start items-start">
@@ -26,7 +26,7 @@ const Received = (props) => {
                       </p>
                       <div className="space-x-2 ">
                         <p className="badge badge-ghost badge-sm">
-                          {parcel.weight}
+                          {parcel.weight}kg
                         </p>
                         <p className="badge badge-ghost badge-sm">
                           {parcel.date}
