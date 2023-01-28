@@ -1,12 +1,38 @@
-const AddressForm = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+import { useState } from "react";
 
-    const form = e.target;
-    const formData = new FormData(form);
+const AddressForm = ({ handleChildData }) => {
+  const [address, setAddress] = useState({
+    fullName: "",
+    street1: "",
+    street2: "",
+    city: "",
+    postalCode: "",
+    country: "",
+    phoneNumber: "",
+  });
 
-    const deliveryAddress = Object.fromEntries(formData.entries());
-    console.log(deliveryAddress);
+  const handleFullName = (e) => {
+    setAddress({ ...address, fullName: e.target.value });
+  };
+
+  const handleStreet1 = (e) => {
+    setAddress({ ...address, street1: e.target.value });
+  };
+
+  const handleStreet2 = (e) => {
+    setAddress({ ...address, street2: e.target.value });
+  };
+  const handleCity = (e) => {
+    setAddress({ ...address, city: e.target.value });
+  };
+  const handlePostalCode = (e) => {
+    setAddress({ ...address, postalCode: e.target.value });
+  };
+  const handleCountry = (e) => {
+    setAddress({ ...address, country: e.target.value });
+  };
+  const handlePhoneNumber = (e) => {
+    setAddress({ ...address, phoneNumber: e.target.value });
   };
 
   return (
@@ -18,84 +44,103 @@ const AddressForm = () => {
           </h3>
         </div>
 
-        <form method="post" onSubmit={handleSubmit}>
-          <div></div>
-
-          <div className="form-control">
-            <div className="divider"></div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                required
-                className="input input-bordered input-sm w-full "
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                name="street1"
-                placeholder="Street Address 1"
-                required
-                className="input input-bordered input-sm w-full "
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                name="street2"
-                placeholder="Street Address 2"
-                className="input input-bordered input-sm w-full "
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                name="city"
-                placeholder="City"
-                required
-                className="input input-bordered input-sm w-full "
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                name="country"
-                inputMode="numeric"
-                placeholder="Country"
-                required
-                className="input input-bordered input-sm w-full "
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                name="phone"
-                inputMode="numeric"
-                placeholder="Phone Number"
-                required
-                className="input input-bordered input-sm w-full "
-              />
-            </div>
-          </div>
-
+        <div className="">
           <div className="divider"></div>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="btn btn-sm btn-block btn-primary mt-12"
-            >
-              Submit
-            </button>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              name="name"
+              value={address.fullName}
+              onChange={handleFullName}
+              placeholder="Full Name"
+              required
+              className="input input-bordered input-sm w-full "
+            />
           </div>
-        </form>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              name="street1"
+              value={address.street1}
+              onChange={handleStreet1}
+              placeholder="Street Address 1"
+              required
+              className="input input-bordered input-sm w-full "
+            />
+          </div>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              name="street2"
+              value={address.street2}
+              onChange={handleStreet2}
+              placeholder="Street Address 2"
+              className="input input-bordered input-sm w-full "
+            />
+          </div>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              name="city"
+              value={address.city}
+              onChange={handleCity}
+              placeholder="City"
+              required
+              className="input input-bordered input-sm w-full "
+            />
+          </div>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              name="postalCode"
+              value={address.postalCode}
+              onChange={handlePostalCode}
+              placeholder="Postal Code"
+              required
+              className="input input-bordered input-sm w-full "
+            />
+          </div>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              name="country"
+              value={address.country}
+              onChange={handleCountry}
+              placeholder="Country"
+              required
+              className="input input-bordered input-sm w-full "
+            />
+          </div>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              name="phone"
+              value={address.phoneNumber}
+              onChange={handlePhoneNumber}
+              placeholder="Phone Number"
+              required
+              className="input input-bordered input-sm w-full "
+            />
+          </div>
+        </div>
+        <div>
+          <button
+            className="btn btn-xs btn-info "
+            type="button"
+            onClick={() => handleChildData({ addressData: address })}
+          >
+            Save
+          </button>
+        </div>
+
+        <div className="divider"></div>
       </div>
     </>
   );

@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-
-import CustomsForm from "../components/CustomsForm";
-import AddressForm from "../components/AddressForm";
-import AdditionalServicesForm from "../components/AdditionalServicesForm";
+import { useState } from "react";
+import CustomsForm from "../../components/CustomsForm";
+import AddressForm from "../../components/AddressForm";
+import AdditionalServicesForm from "../../components/AdditionalServicesForm";
 
 const NewParcel = ({
   setPackedItems,
@@ -11,6 +11,23 @@ const NewParcel = ({
   setReceivedParcels,
   receivedParcels,
 }) => {
+  //form data states
+  const [formData, setFormData] = useState({});
+
+  //data from address, customs and additional services
+  const handleChildData = (childData) => {
+    setFormData({ ...formData, ...childData });
+    console.log("FORM DATA FROM CHILDREN", formData);
+  };
+
+  //handling form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("FORM DATA ON SUBMISSION", formData);
+  };
+
+  //deleting a parcel in new parcel
   const handleDelete = (parcel) => {
     setReceivedParcels([...receivedParcels, parcel]);
     setPackedItems(
@@ -72,15 +89,20 @@ const NewParcel = ({
                 </div>
               );
             })}
-
-            <CustomsForm />
-            <AddressForm />
-            <AdditionalServicesForm />
-            <div className="flex mt-4 w-full">
-              <button className="btn btn-sm ml-auto w-full btn-success">
-                Request packing
-              </button>
-            </div>
+            <form method="post" onSubmit={handleSubmit}>
+              <CustomsForm handleChildData={handleChildData} />
+              <AddressForm handleChildData={handleChildData} />
+              <AdditionalServicesForm handleChildData={handleChildData} />
+              <div className="flex mt-4 w-full">
+                <button
+                  className="btn btn-sm ml-auto w-full btn-success"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Request packing
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </>

@@ -1,27 +1,7 @@
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import { faFedex } from "@fortawesome/free-brands-svg-icons";
 const ReadyToSend = () => {
-  const [order, setOrder] = useState({
-    parcelId: "#001",
-    dateCreated: "Jan 25, 2023",
-    packed: true,
-    shipped: false,
-    readyForPayment: false,
-    weight: "5kg",
-    dimensionalWeight: "5.2kg",
-    totalValue: "R300",
-    shippingAddress: {
-      street: "18 Redcliff Close",
-      postCode: "7441",
-      country: "Zimbabwe",
-      recipient: "Pete Mugasa",
-      phoneNumber: "0746-888-479",
-    },
-    img: "https://placeimg.com/192/192/people",
-  });
-
   return (
     <>
       <div className="w-full p-4 flex justify-center items-center ">

@@ -1,14 +1,19 @@
-const Received = (props) => {
+const Received = ({
+  setPackedItems,
+  setReceivedParcels,
+  receivedParcels,
+  packedItems,
+}) => {
   const handleClick = (parcel, event) => {
-    props.setReceivedParcels(
-      props.receivedParcels.filter((i) => i.shipmentId !== parcel.shipmentId)
+    setReceivedParcels(
+      receivedParcels.filter((i) => i.shipmentId !== parcel.shipmentId)
     );
-    props.setPackedItems([...props.packedItems, parcel]);
+    setPackedItems([...packedItems, parcel]);
   };
-  if (props.receivedParcels.length > 0) {
+  if (receivedParcels.length > 0) {
     return (
       <>
-        {props.receivedParcels.map((parcel) => {
+        {receivedParcels.map((parcel) => {
           return (
             <div key={parcel.id}>
               <div className="flex flex-col w-screen px-2">

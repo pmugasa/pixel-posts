@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Auth/Profile";
 import Home from "./pages/Home";
-import NewParcel from "./pages/NewParcel";
-import Login from "./pages/Login";
-import ReadyToSend from "./pages/ReadyToSend";
-import Received from "./pages/Received";
-import Settings from "./pages/Settings";
-import Signup from "./pages/Signup";
+import NewParcel from "./pages/Parcel/NewParcel";
+import Login from "./pages/Auth/Login";
+import ReadyToSend from "./pages/Parcel/ReadyToSend";
+import Received from "./pages/Parcel/Received";
+import Settings from "./pages/Auth/Settings";
+import Signup from "./pages/Auth/Signup";
 import ShippingRates from "./pages/ShippingRates";
 import NoPage from "./pages/NoPage";
-import Customs from "./pages/Customs";
+
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase-config.js";
 
@@ -23,6 +23,7 @@ const App = () => {
       const data = await getDocs(collection(db, "Received Parcels"));
 
       const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      //modifying date object to js date
       const updatedData = newData.map((obj) => {
         obj.date = obj.date.toDate().toDateString();
         return obj;
@@ -34,6 +35,7 @@ const App = () => {
   }, []);
 
   const [packedItems, setPackedItems] = useState([]);
+
   const authenticated = true;
   if (authenticated) {
     return (
@@ -66,7 +68,7 @@ const App = () => {
               />
             }
           />
-          <Route path="customs-declaration" element={<Customs />} />
+
           <Route path="settings" element={<Settings />} />
           <Route path="sign-up" element={<Signup />} />
           <Route path="shipping-rates" element={<ShippingRates />} />
