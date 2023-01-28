@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import CustomsForm from "../../components/CustomsForm";
 import AddressForm from "../../components/AddressForm";
 import AdditionalServicesForm from "../../components/AdditionalServicesForm";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 const NewParcel = ({
   setPackedItems,
@@ -11,6 +13,12 @@ const NewParcel = ({
   setReceivedParcels,
   receivedParcels,
 }) => {
+  //formRef
+  const formRef = useRef(null);
+
+  //keeping track of the number of parcels created
+  let parcelNumber = 0;
+
   //form data states
   const [formData, setFormData] = useState({});
 
@@ -21,9 +29,24 @@ const NewParcel = ({
   };
 
   //handling form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //adding packed items to the data to be sent to the server
+    formData.pack = packedItems;
+    formData.parcelNumber = parcelNumber++;
+
+    //saving data to PACKED ITEMS collection
+    try {
+      const docRef = await addDoc(collection(db, "Packed Items"), formData);
+
+      console.log("Document written with ID:", docRef.id);
+    } catch (error) {
+      console.error("error adding doc:", error);
+    }
+
+    //resetting the form after submission
+    formRef.current.reset();
     console.log("FORM DATA ON SUBMISSION", formData);
   };
 
@@ -35,6 +58,7 @@ const NewParcel = ({
     );
   };
 
+  //calculating total weight of the packed items
   const totalWeight = (packedItems, weight) => {
     let total = 0;
     for (let obj of packedItems) {
@@ -89,7 +113,7 @@ const NewParcel = ({
                 </div>
               );
             })}
-            <form method="post" onSubmit={handleSubmit}>
+            <form method="post" onSubmit={handleSubmit} ref={formRef}>
               <CustomsForm handleChildData={handleChildData} />
               <AddressForm handleChildData={handleChildData} />
               <AdditionalServicesForm handleChildData={handleChildData} />

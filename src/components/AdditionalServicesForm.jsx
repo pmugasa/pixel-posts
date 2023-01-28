@@ -133,6 +133,7 @@ const AdditionalServicesForm = ({ handleChildData }) => {
           <div>
             <button
               className="btn btn-xs btn-success"
+              type="button"
               onClick={() => handleChildData({ addonsData: addons })}
             >
               Save
