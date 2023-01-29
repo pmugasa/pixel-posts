@@ -4,7 +4,7 @@ const Received = ({
   receivedParcels,
   packedItems,
 }) => {
-  const handleClick = (parcel, event) => {
+  const handleClick = (parcel) => {
     setReceivedParcels(
       receivedParcels.filter((i) => i.shipmentId !== parcel.shipmentId)
     );

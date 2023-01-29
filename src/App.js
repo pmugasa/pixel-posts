@@ -18,6 +18,10 @@ import { db } from "./firebase-config.js";
 const App = () => {
   const [receivedParcels, setReceivedParcels] = useState([]);
 
+  //form data states
+  const [formData, setFormData] = useState({});
+
+  //fetching received parcels from the DB
   useEffect(() => {
     const getReceivedParcels = async () => {
       const data = await getDocs(collection(db, "Received Parcels"));
@@ -52,11 +56,16 @@ const App = () => {
                 setPackedItems={setPackedItems}
                 receivedParcels={receivedParcels}
                 setReceivedParcels={setReceivedParcels}
+                formData={formData}
+                setFormData={setFormData}
               />
             }
           />
           <Route path="login" element={<Login />} />
-          <Route path="ready-to-send" element={<ReadyToSend />} />
+          <Route
+            path="ready-to-send"
+            element={<ReadyToSend formData={formData} />}
+          />
           <Route
             path="received"
             element={

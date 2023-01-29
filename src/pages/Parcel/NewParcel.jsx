@@ -1,26 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import CustomsForm from "../../components/CustomsForm";
 import AddressForm from "../../components/AddressForm";
 import AdditionalServicesForm from "../../components/AdditionalServicesForm";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../firebase-config";
 
 const NewParcel = ({
   setPackedItems,
   packedItems,
   setReceivedParcels,
   receivedParcels,
+  formData,
+  setFormData,
 }) => {
   //formRef
   const formRef = useRef(null);
-
-  //keeping track of the number of parcels created
-  let parcelNumber = 0;
-
-  //form data states
-  const [formData, setFormData] = useState({});
 
   //data from address, customs and additional services
   const handleChildData = (childData) => {
@@ -34,19 +28,7 @@ const NewParcel = ({
 
     //adding packed items to the data to be sent to the server
     formData.pack = packedItems;
-    formData.parcelNumber = parcelNumber++;
 
-    //saving data to PACKED ITEMS collection
-    try {
-      const docRef = await addDoc(collection(db, "Packed Items"), formData);
-
-      console.log("Document written with ID:", docRef.id);
-    } catch (error) {
-      console.error("error adding doc:", error);
-    }
-
-    //resetting the form after submission
-    formRef.current.reset();
     console.log("FORM DATA ON SUBMISSION", formData);
   };
 
