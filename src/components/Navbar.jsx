@@ -56,7 +56,7 @@ const Navbar = (props) => {
             </Link>
           </li>
           <li>
-            <Link to="/shipping-rates">
+            <Link to="/profile">
               <FontAwesomeIcon icon={faCircleUser} size="lg" />
               <span className="hidden lg:block">Profile</span>
             </Link>

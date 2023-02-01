@@ -1,8 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
-import { faFedex } from "@fortawesome/free-brands-svg-icons";
+import { faFedex, faDhl, faUps } from "@fortawesome/free-brands-svg-icons";
+import axios from "axios";
+import env from "react-dotenv";
+import { useState } from "react";
 
 const ReadyToSend = ({ formData }) => {
+  //shipping rates states
+  const [selectedRate, setSelectedRate] = useState("");
+
   //address data
   const address = formData.addressData;
   const declaredItems = formData.customsData;
@@ -50,12 +56,51 @@ const ReadyToSend = ({ formData }) => {
     async: false,
   };
 
-  const json = JSON.stringify(shipment);
-  console.log("JSON DATA", json);
-  console.log(customsDeclaration);
-  console.log(address);
-  console.log(declaredItems);
-  console.log(addons);
+  const jsonShipment = JSON.stringify(shipment);
+
+  //shipping rates
+  const rates = [
+    {
+      amount: 600,
+      provider: "DHL",
+      provider_image_200: <FontAwesomeIcon icon={faDhl} size="2xl" />,
+      servicelevel: "Priority Mail",
+      estimated_days: 2,
+    },
+    {
+      amount: 1000,
+      provider: "Fedex",
+      provider_image_200: <FontAwesomeIcon icon={faFedex} size="2xl" />,
+      servicelevel: "Priority Mail",
+      estimated_days: 3,
+    },
+    {
+      amount: 500,
+      provider: "UPS",
+      provider_image_200: <FontAwesomeIcon icon={faUps} size="2xl" />,
+      servicelevel: "Priority Mail",
+      estimated_days: 2,
+    },
+  ];
+
+  //getting the value of selected shipping rate
+  const handleSelect = (e) => {
+    setSelectedRate(e.target.value);
+    console.log("rate selected", selectedRate);
+  };
+
+  //calculating total costs for payment
+  const handleClick = async () => {
+    //when the button is clicked fetch the shipping rates using the shipment object
+    // render the list as radio buttons and user can only click one
+    // sort the list in accordance to the cheapest one
+    // calculate the total cost that includes addons and shipping cost
+    //when payment is successful create an order and add it to the db
+    // change the badge to order shipping soon
+    //
+    //show the order
+    console.log("payment clicked");
+  };
 
   if (typeof address !== "undefined") {
     return (
@@ -123,24 +168,31 @@ const ReadyToSend = ({ formData }) => {
                 </div>
               </div>
 
-              <div className="">
-                <p className="font-bold">
-                  Total Weight <span className="font-light">5.1kg</span>
-                </p>
-                <p className="font-bold">
-                  Dimensional Weight <span className="font-light">12.2kg</span>
-                </p>
+              {[
+                parcel !== "undefined" ? (
+                  <div className="">
+                    <p className="font-bold">
+                      Total Weight <span className="font-light">5.1kg</span>
+                    </p>
+                    <p className="font-bold">
+                      Dimensional Weight{" "}
+                      <span className="font-light">12.2kg</span>
+                    </p>
 
-                <a
-                  href="https://www.fedex.com/en-us/shipping/packaging/what-is-dimensional-weight.html"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="link link-hover link-primary"
-                >
-                  <FontAwesomeIcon icon={faCircleQuestion} size="sm" />{" "}
-                  Dimension Weight
-                </a>
-              </div>
+                    <a
+                      href="https://www.fedex.com/en-us/shipping/packaging/what-is-dimensional-weight.html"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link link-hover link-primary"
+                    >
+                      <FontAwesomeIcon icon={faCircleQuestion} size="sm" />{" "}
+                      Dimension Weight
+                    </a>
+                  </div>
+                ) : (
+                  <p>parcel is still being packed</p>
+                ),
+              ]}
             </div>
 
             <div className="divider"></div>
@@ -181,8 +233,45 @@ const ReadyToSend = ({ formData }) => {
             </div>
             <div className="divider"></div>
 
+            <div className="p-4 w-full">
+              <h3 className="font-bold text-gray-500">
+                CHOOSE YOUR COURIER OF CHOICE
+              </h3>
+              {rates.map((rate, index) => {
+                return (
+                  <>
+                    <div key={index}>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          value={rate.amount}
+                          name="rate"
+                          className="radio radio-primary radio-sm"
+                          onChange={handleSelect}
+                          defaultChecked={selectedRate === rate.amount}
+                        />
+                        <div className="grid  grid-flow-col auto-cols-max items-center space-x-3">
+                          <span>{rate.provider_image_200}</span>
+
+                          <p className="italic text-sm">{rate.servicelevel}</p>
+                          <p className="italic text-sm">
+                            Estimated arrival {rate.estimated_days} days
+                          </p>
+                          <p className="font-bold">R{rate.amount}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+            <div>
+              <p>{selectedRate}</p>
+            </div>
             <div className="w-full p-4 space-x-4">
-              <button className="btn btn-sm btn-primary ">Make payment</button>
+              <button className="btn btn-sm btn-primary" onClick={handleClick}>
+                Make payment
+              </button>
               <button className="btn btn-sm btn-outline btn-ghost ">
                 Edit Address
               </button>
