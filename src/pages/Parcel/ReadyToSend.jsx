@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import { faFedex, faDhl, faUps } from "@fortawesome/free-brands-svg-icons";
-import axios from "axios";
+
 import env from "react-dotenv";
 import { useState } from "react";
 
@@ -56,8 +56,6 @@ const ReadyToSend = ({ formData }) => {
     async: false,
   };
 
-  const jsonShipment = JSON.stringify(shipment);
-
   //shipping rates
   const rates = [
     {
@@ -89,17 +87,29 @@ const ReadyToSend = ({ formData }) => {
     console.log("rate selected", selectedRate);
   };
 
+  const yoco = new window.YocoSDK({
+    publicKey: env.YOCO_KEY,
+  });
   //calculating total costs for payment
-  const handleClick = async () => {
-    //when the button is clicked fetch the shipping rates using the shipment object
-    // render the list as radio buttons and user can only click one
-    // sort the list in accordance to the cheapest one
-    // calculate the total cost that includes addons and shipping cost
-    //when payment is successful create an order and add it to the db
-    // change the badge to order shipping soon
-    //
-    //show the order
-    console.log("payment clicked");
+  const handleClick = () => {
+    yoco.showPopup({
+      amountInCents: selectedRate * 100,
+      currency: "ZAR",
+      name: "PixelPost",
+      description: "Shop & Ship",
+      callback: function (result) {
+        //this function returns a token that the server can user to capture a payment
+
+        if (result.error) {
+          const errorMessage = result.error.message;
+          alert("error occured" + errorMessage);
+        } else {
+          alert("card successfully tokenised:", result.id);
+          //TODO save the order to the DB
+          //TODO add the total costs that includes services
+        }
+      },
+    });
   };
 
   if (typeof address !== "undefined") {
@@ -235,12 +245,12 @@ const ReadyToSend = ({ formData }) => {
 
             <div className="p-4 w-full">
               <h3 className="font-bold text-gray-500">
-                CHOOSE YOUR COURIER OF CHOICE
+                CHOOSE YOUR CARRIER OF CHOICE
               </h3>
               {rates.map((rate, index) => {
                 return (
                   <>
-                    <div key={index}>
+                    <div key={rate.provider}>
                       <div className="flex items-center space-x-2">
                         <input
                           type="radio"
