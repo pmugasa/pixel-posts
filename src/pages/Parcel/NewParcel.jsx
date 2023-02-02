@@ -1,37 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { useRef } from "react";
-import CustomsForm from "../../components/CustomsForm";
-import AddressForm from "../../components/AddressForm";
-import AdditionalServicesForm from "../../components/AdditionalServicesForm";
+
+import MultiStepForm from "../../components/MultiStepForm";
 
 const NewParcel = ({
   setPackedItems,
   packedItems,
   setReceivedParcels,
   receivedParcels,
-  formData,
-  setFormData,
+  setRtsData,
 }) => {
-  //formRef
-  const formRef = useRef(null);
-
-  //data from address, customs and additional services
-  const handleChildData = (childData) => {
-    setFormData({ ...formData, ...childData });
-    console.log("FORM DATA FROM CHILDREN", formData);
-  };
-
-  //handling form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    //adding packed items to the data to be sent to the server
-    formData.pack = packedItems;
-
-    console.log("FORM DATA ON SUBMISSION", formData);
-  };
-
   //deleting a parcel in new parcel
   const handleDelete = (parcel) => {
     setReceivedParcels([...receivedParcels, parcel]);
@@ -95,20 +73,8 @@ const NewParcel = ({
                 </div>
               );
             })}
-            <form method="post" onSubmit={handleSubmit} ref={formRef}>
-              <CustomsForm handleChildData={handleChildData} />
-              <AddressForm handleChildData={handleChildData} />
-              <AdditionalServicesForm handleChildData={handleChildData} />
-              <div className="flex mt-4 w-full">
-                <button
-                  className="btn btn-sm ml-auto w-full btn-success"
-                  type="submit"
-                  onClick={handleSubmit}
-                >
-                  Request packing
-                </button>
-              </div>
-            </form>
+
+            <MultiStepForm setRtsData={setRtsData} />
           </div>
         </div>
       </>

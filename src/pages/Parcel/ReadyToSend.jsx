@@ -5,14 +5,15 @@ import { faFedex, faDhl, faUps } from "@fortawesome/free-brands-svg-icons";
 import env from "react-dotenv";
 import { useState } from "react";
 
-const ReadyToSend = ({ formData }) => {
+const ReadyToSend = ({ rtsData }) => {
   //shipping rates states
   const [selectedRate, setSelectedRate] = useState("");
 
   //address data
-  const address = formData.addressData;
-  const declaredItems = formData.customsData;
-  const addons = formData.addonsData;
+  console.log("RTS DATA", rtsData);
+  const address = rtsData.address;
+  const declaredItems = rtsData.customsItems;
+  const addons = rtsData.addons;
 
   //customs declaration object to be sent to Shippo
   const customsDeclaration = {
@@ -209,18 +210,15 @@ const ReadyToSend = ({ formData }) => {
             <div className="w-full p-4">
               <h3 className="font-bold text-gray-500">DECLARED ITEMS</h3>
 
-              {declaredItems.map((item, index) => {
-                return (
-                  <div
-                    className="flex border-b-2 border-gray-200 mt-4"
-                    key={index}
-                  >
-                    <p>{item.quantity}</p>
-                    <p className="ml-4 text-gray-500">{item.description}</p>
-                    <p className="ml-auto text-gray-500">{item.value_amount}</p>
-                  </div>
-                );
-              })}
+              <div className="flex border-b-2 border-gray-200 mt-4">
+                <p>{declaredItems.quantity}</p>
+                <p className="ml-4 text-gray-500">
+                  {declaredItems.description}
+                </p>
+                <p className="ml-auto text-gray-500">
+                  {declaredItems.value_amount}
+                </p>
+              </div>
             </div>
             <div className="divider"></div>
 

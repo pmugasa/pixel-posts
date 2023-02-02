@@ -1,40 +1,4 @@
-import { useState } from "react";
-
-const AddressForm = ({ handleChildData }) => {
-  const [address, setAddress] = useState({
-    fullName: "",
-    street1: "",
-    street2: "",
-    city: "",
-    postalCode: "",
-    country: "",
-    phoneNumber: "",
-  });
-
-  const handleFullName = (e) => {
-    setAddress({ ...address, fullName: e.target.value });
-  };
-
-  const handleStreet1 = (e) => {
-    setAddress({ ...address, street1: e.target.value });
-  };
-
-  const handleStreet2 = (e) => {
-    setAddress({ ...address, street2: e.target.value });
-  };
-  const handleCity = (e) => {
-    setAddress({ ...address, city: e.target.value });
-  };
-  const handlePostalCode = (e) => {
-    setAddress({ ...address, postalCode: e.target.value });
-  };
-  const handleCountry = (e) => {
-    setAddress({ ...address, country: e.target.value });
-  };
-  const handlePhoneNumber = (e) => {
-    setAddress({ ...address, phoneNumber: e.target.value });
-  };
-
+const AddressForm = ({ formData, setFormData }) => {
   return (
     <>
       <div className="border-2 border-gray-200 border-rounded shadow-sm w-96 p-6 mt-6">
@@ -51,8 +15,16 @@ const AddressForm = ({ handleChildData }) => {
             <input
               type="text"
               name="name"
-              value={address.fullName}
-              onChange={handleFullName}
+              value={formData.address.fullName}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  address: {
+                    ...formData.address,
+                    fullName: e.target.value,
+                  },
+                })
+              }
               placeholder="Full Name"
               required
               className="input input-bordered input-sm w-full "
@@ -63,8 +35,16 @@ const AddressForm = ({ handleChildData }) => {
             <input
               type="text"
               name="street1"
-              value={address.street1}
-              onChange={handleStreet1}
+              value={formData.address.street1}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  address: {
+                    ...formData.address,
+                    street1: e.target.value,
+                  },
+                })
+              }
               placeholder="Street Address 1"
               required
               className="input input-bordered input-sm w-full "
@@ -75,8 +55,16 @@ const AddressForm = ({ handleChildData }) => {
             <input
               type="text"
               name="street2"
-              value={address.street2}
-              onChange={handleStreet2}
+              value={formData.address.street2}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  address: {
+                    ...formData.address,
+                    street2: e.target.value,
+                  },
+                })
+              }
               placeholder="Street Address 2"
               className="input input-bordered input-sm w-full "
             />
@@ -86,8 +74,16 @@ const AddressForm = ({ handleChildData }) => {
             <input
               type="text"
               name="city"
-              value={address.city}
-              onChange={handleCity}
+              value={formData.address.city}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  address: {
+                    ...formData.address,
+                    city: e.target.value,
+                  },
+                })
+              }
               placeholder="City"
               required
               className="input input-bordered input-sm w-full "
@@ -98,8 +94,16 @@ const AddressForm = ({ handleChildData }) => {
             <input
               type="text"
               name="postalCode"
-              value={address.postalCode}
-              onChange={handlePostalCode}
+              value={formData.address.postalCode}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  address: {
+                    ...formData.address,
+                    postalCode: e.target.value,
+                  },
+                })
+              }
               placeholder="Postal Code"
               required
               className="input input-bordered input-sm w-full "
@@ -110,8 +114,16 @@ const AddressForm = ({ handleChildData }) => {
             <input
               type="text"
               name="country"
-              value={address.country}
-              onChange={handleCountry}
+              value={formData.address.country}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  address: {
+                    ...formData.address,
+                    country: e.target.value,
+                  },
+                })
+              }
               placeholder="Country"
               required
               className="input input-bordered input-sm w-full "
@@ -122,22 +134,21 @@ const AddressForm = ({ handleChildData }) => {
             <input
               type="text"
               name="phone"
-              value={address.phoneNumber}
-              onChange={handlePhoneNumber}
+              value={formData.address.phoneNumber}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  address: {
+                    ...formData.address,
+                    phoneNumber: e.target.value,
+                  },
+                })
+              }
               placeholder="Phone Number"
               required
               className="input input-bordered input-sm w-full "
             />
           </div>
-        </div>
-        <div>
-          <button
-            className="btn btn-xs btn-info "
-            type="button"
-            onClick={() => handleChildData({ addressData: address })}
-          >
-            Save
-          </button>
         </div>
 
         <div className="divider"></div>

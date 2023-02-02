@@ -1,62 +1,10 @@
-import { useState } from "react";
-
-const AdditionalServicesForm = ({ handleChildData }) => {
-  const [addons, setAddons] = useState({
-    itemPhotos: false,
-    deviceTesting: false,
-    doubleWalledBox: false,
-    bubbleWrap: false,
-  });
-
-  const handleItemPhotos = (e) => {
-    if (e.target.checked) {
-      setAddons({
-        ...addons,
-        itemPhotos: e.target.checked,
-      });
-    } else {
-      return;
-    }
-  };
-  const handleDeviceTesting = (e) => {
-    if (e.target.checked) {
-      setAddons({
-        ...addons,
-        deviceTesting: e.target.checked,
-      });
-    } else {
-      return;
-    }
-  };
-
-  const handleDoubleWalledBox = (e) => {
-    if (e.target.checked) {
-      setAddons({
-        ...addons,
-        doubleWalledBox: e.target.checked,
-      });
-    } else {
-      return;
-    }
-  };
-
-  const handleBubbleWrap = (e) => {
-    if (e.target.checked) {
-      setAddons({
-        ...addons,
-        bubbleWrap: e.target.checked,
-      });
-    } else {
-      return;
-    }
-  };
-
+const AddonsForm = ({ formData, setFormData }) => {
   return (
     <>
       <div className="border-2 border-gray-200 border-rounded shadow-sm w-96 p-6 mt-6">
         <div className="mb-4">
           <h3 className="text-center text-lg text-gray-500 font-bold ">
-            ADDITIONAL SERVICES
+            ADDONS
           </h3>
         </div>
         <div className="divider"></div>
@@ -73,8 +21,16 @@ const AdditionalServicesForm = ({ handleChildData }) => {
                 type="checkbox"
                 className="toggle toggle-primary"
                 name="itemPhotos"
-                value={addons.itemPhotos}
-                onChange={handleItemPhotos}
+                value={formData.addons.itemPhotos}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    addons: {
+                      ...formData.addons,
+                      addons: e.target.checked,
+                    },
+                  })
+                }
               />
             </label>
           </div>
@@ -90,8 +46,16 @@ const AdditionalServicesForm = ({ handleChildData }) => {
                 type="checkbox"
                 className="toggle toggle-primary"
                 name="itemPhotos"
-                value={addons.deviceTesting}
-                onChange={handleDeviceTesting}
+                value={formData.addons.deviceTesting}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    addons: {
+                      ...formData.addons,
+                      deviceTesting: e.target.checked,
+                    },
+                  })
+                }
               />
             </label>
           </div>
@@ -107,8 +71,16 @@ const AdditionalServicesForm = ({ handleChildData }) => {
                 type="checkbox"
                 className="toggle toggle-primary"
                 name="itemPhotos"
-                value={addons.bubbleWrap}
-                onChange={handleBubbleWrap}
+                value={false}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    addons: {
+                      ...formData.addons,
+                      bubbleWrap: e.target.checked,
+                    },
+                  })
+                }
               />
             </label>
           </div>
@@ -124,20 +96,18 @@ const AdditionalServicesForm = ({ handleChildData }) => {
                 type="checkbox"
                 className="toggle toggle-primary"
                 name="itemPhotos"
-                value={addons.doubleWalledBox}
-                onChange={handleDoubleWalledBox}
+                value={false}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    addons: {
+                      ...formData.addons,
+                      doubleWalledBox: e.target.checked,
+                    },
+                  })
+                }
               />
             </label>
-          </div>
-
-          <div>
-            <button
-              className="btn btn-xs btn-success"
-              type="button"
-              onClick={() => handleChildData({ addonsData: addons })}
-            >
-              Save
-            </button>
           </div>
         </div>
       </div>
@@ -145,4 +115,4 @@ const AdditionalServicesForm = ({ handleChildData }) => {
   );
 };
 
-export default AdditionalServicesForm;
+export default AddonsForm;

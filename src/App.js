@@ -18,8 +18,8 @@ import { db } from "./firebase-config.js";
 const App = () => {
   const [receivedParcels, setReceivedParcels] = useState([]);
 
-  //form data states
-  const [formData, setFormData] = useState({});
+  //form data address, addons, customs
+  const [rtsData, setRtsData] = useState({});
 
   //fetching received parcels from the DB
   useEffect(() => {
@@ -56,15 +56,14 @@ const App = () => {
                 setPackedItems={setPackedItems}
                 receivedParcels={receivedParcels}
                 setReceivedParcels={setReceivedParcels}
-                formData={formData}
-                setFormData={setFormData}
+                setRtsData={setRtsData}
               />
             }
           />
           <Route path="login" element={<Login />} />
           <Route
             path="ready-to-send"
-            element={<ReadyToSend formData={formData} />}
+            element={<ReadyToSend rtsData={rtsData} />}
           />
           <Route
             path="received"
