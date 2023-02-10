@@ -1,4 +1,4 @@
 const Profile = () => {
-  return <h1>Hello from Profile</h1>;
+  return <h1>Logged in as </h1>;
 };
 export default Profile;

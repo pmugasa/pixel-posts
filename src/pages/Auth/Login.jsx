@@ -1,21 +1,7 @@
-const Login = () => {
-  //TODO: fix form scrolling
-  //TODO: put form reset
-  const handleSubmit = (e) => {
-    //preventing browser from reloading
-    e.preventDefault();
-
-    //reading the form data
-    const form = e.target;
-    const formData = new FormData(form);
-
-    const formJson = Object.fromEntries(formData.entries());
-    console.log("FORM DATA", formJson);
-  };
-
+const Login = ({ handleLogin, email, setEmail, password, setPassword }) => {
   return (
     <>
-      <form method="POST" onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <div className="flex items-center justify-center h-screen  sm:flex sm:items-center sm:justify-center sm:h-screen ">
           <div className="card w-96 bg-base-100 shadow-2xl">
             <div className="card-body">
@@ -27,6 +13,8 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
+                  value={email}
+                  onChange={({ target }) => setEmail(target.value)}
                   placeholder="example@mail.com"
                   className="input input-bordered input-accent w-full max-w-xs"
                 />
@@ -38,18 +26,22 @@ const Login = () => {
                 <input
                   type="password"
                   name="password"
+                  value={password}
+                  onChange={({ target }) => setPassword(target.value)}
                   placeholder="••••••••••••••••"
                   className="input input-bordered input-accent w-full max-w-xs"
                 />
               </div>
               <div className="card-actions justify-end mt-4">
-                <button className="btn  btn-primary w-full">Login</button>
+                <button type="submit" className="btn  btn-primary w-full">
+                  Login
+                </button>
               </div>
               <div className="flex space-x-4 mt-4 mr-auto">
                 <p>Not registered?</p>
-                <a href="/login" className="link link-primary">
+                <Link href="/signup" className="link link-primary">
                   Create an account
-                </a>
+                </Link>
               </div>
             </div>
           </div>

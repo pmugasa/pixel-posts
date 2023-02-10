@@ -9,7 +9,7 @@ import {
   faCalculator,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = (props) => {
+const Navbar = ({ receivedParcels, packedItems, handleLogout }) => {
   return (
     <>
       <nav className="bg-primary flex p-2 w-screen">
@@ -21,10 +21,10 @@ const Navbar = (props) => {
 
         <ul className="menu menu-horizontal flex justify-center space-x-6  w-full mx-auto ">
           <li>
-            <Link to="/received" className="indicator">
+            <Link to="/received-parcels" className="indicator">
               <div className="indicator">
                 <span className="indicator-item indicator-end badge badge-xs badge-secondary">
-                  {props.receivedParcels.length}
+                  {receivedParcels.length}
                 </span>
                 <FontAwesomeIcon icon={faInbox} size="lg" />
                 <span className="hidden lg:block">Recieved</span>
@@ -36,7 +36,7 @@ const Navbar = (props) => {
             <Link to="/new-parcel">
               <div className="indicator">
                 <span className="indicator-item indicator-end badge badge-xs badge-secondary">
-                  {props.packedItems.length}
+                  {packedItems.length}
                 </span>
                 <FontAwesomeIcon icon={faBoxArchive} size="lg" />
                 <span className="hidden lg:block">New Parcel</span>
@@ -61,7 +61,7 @@ const Navbar = (props) => {
               <span className="hidden lg:block">Profile</span>
             </Link>
           </li>
-          <li onClick={() => console.log("logged out")}>
+          <li onClick={handleLogout}>
             <FontAwesomeIcon icon={faRightFromBracket} size="lg" />
             <span className="hidden lg:block">Logout</span>
           </li>

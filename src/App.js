@@ -1,95 +1,77 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Profile from "./pages/Auth/Profile";
-import Home from "./pages/Home";
-import NewParcel from "./pages/Parcel/NewParcel";
+import { useEffect, useState } from "react";
 import Login from "./pages/Auth/Login";
-import ReadyToSend from "./pages/Parcel/ReadyToSend";
-import Received from "./pages/Parcel/Received";
-import Settings from "./pages/Auth/Settings";
-import Signup from "./pages/Auth/Signup";
-import ShippingRates from "./pages/ShippingRates";
-import NoPage from "./pages/NoPage";
-
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebase-config.js";
+import loginService from "./services/login";
+import signUpService from "./services/signup";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
-  const [receivedParcels, setReceivedParcels] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
 
-  //form data address, addons, customs
-  const [rtsData, setRtsData] = useState({});
+  const handleLogin = async (e) => {
+    //preventing browser from reloading
+    e.preventDefault();
+    console.log("Before login state", user);
+    try {
+      const user = await loginService.login({ email, password });
+      //saving token
+      window.localStorage.setItem("loggedPixelPostUser", JSON.stringify(user));
+      setUser(user);
 
-  //fetching received parcels from the DB
+      setEmail("");
+      setPassword("");
+    } catch (exception) {
+      console.log(exception);
+    }
+  };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    try {
+      const user = await signUpService.signUp({ email, password });
+      window.localStorage.setItem("loggedPixelPostUser", JSON.stringify(user));
+      setUser(user);
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const getReceivedParcels = async () => {
-      const data = await getDocs(collection(db, "Received Parcels"));
-
-      const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      //modifying date object to js date
-      const updatedData = newData.map((obj) => {
-        obj.date = obj.date.toDate().toDateString();
-        return obj;
-      });
-      setReceivedParcels(updatedData);
-    };
-
-    getReceivedParcels();
+    const loggedUserJSON = window.localStorage.getItem("loggedPixelPostUser");
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
   }, []);
 
-  const [packedItems, setPackedItems] = useState([]);
+  const handleLogout = () => {
+    setUser(null);
+    window.localStorage.removeItem("loggedPixelPostUser");
+    console.log("logged out");
+  };
 
-  const authenticated = true;
-  if (authenticated) {
+  if (user === null) {
     return (
-      <BrowserRouter>
-        <Navbar packedItems={packedItems} receivedParcels={receivedParcels} />
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="profile" element={<Profile />} />
-          <Route
-            path="new-parcel"
-            element={
-              <NewParcel
-                packedItems={packedItems}
-                setPackedItems={setPackedItems}
-                receivedParcels={receivedParcels}
-                setReceivedParcels={setReceivedParcels}
-                setRtsData={setRtsData}
-              />
-            }
-          />
-          <Route path="login" element={<Login />} />
-          <Route
-            path="ready-to-send"
-            element={<ReadyToSend rtsData={rtsData} />}
-          />
-          <Route
-            path="received"
-            element={
-              <Received
-                packedItems={packedItems}
-                setPackedItems={setPackedItems}
-                receivedParcels={receivedParcels}
-                setReceivedParcels={setReceivedParcels}
-              />
-            }
-          />
-
-          <Route path="settings" element={<Settings />} />
-          <Route path="sign-up" element={<Signup />} />
-          <Route path="shipping-rates" element={<ShippingRates />} />
-          <Route path="*" element={<NoPage />} />
-        </Routes>
-      </BrowserRouter>
+      <>
+        <Login
+          handleLogin={handleLogin}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+        />
+      </>
+    );
+  } else if (user !== null) {
+    return (
+      <>
+        <Dashboard handleLogout={handleLogout} />
+      </>
     );
   }
-
-  return (
-    <>
-      <Login />
-    </>
-  );
 };
 export default App;
